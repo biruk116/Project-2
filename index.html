@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>
+         Treasure Hunt
+      </title>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <style>
+		div{text-align: center;}
+	  </style>
+	  <script type="text/javascript">
+		var loc0 = "Cave";
+		var loc1 = "Entrance";
+		var loc2 = "Dungeon";
+		var loc3 = "Trap Room";
+		var loc4 = "Treasure Room";
+		var loc0_visited = false;
+		var loc1_visited = true;
+		var loc2_visited = false;
+		var loc3_visited = false;
+		var loc4_visited = false;
+		var current_loc = "loc1";
+		var points = 0;
+		var message = "";
+        
+		function change_message(message) {
+			var txt_area = document.getElementById("ta_main");
+			txt_area.value = message + "\n\n" + txt_area.value;
+		}
+		
+		function btnNorth_Click() {
+			var txt_points_a = document.getElementById("txt_points");
+			var txt_loc_a = document.getElementById("txt_loc");
+			if (current_loc === "loc0") {
+				current_loc = "loc1";
+				txt_loc_a.value = loc1;
+				message = "You are at the entrance";
+				change_message(message);
+				if (loc1_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc1_visited = true;
+				}
+			}
+			else if (current_loc === "loc3") {
+				current_loc = "loc0";
+				txt_loc_a.value = loc0;
+				message = "You have entered the cave";
+				change_message(message);
+				if (loc0_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc0_visited = true;
+				}
+			}
+			else {
+				message = "You cannot go North from here.";
+				change_message(message);
+			}
+		}
+		
+		function btnEast_Click() {
+			var txt_points_a = document.getElementById("txt_points");
+			var txt_loc_a = document.getElementById("txt_loc");
+			if (current_loc === "loc0") {
+				current_loc = "loc2";
+				txt_loc_a.value = loc2;
+				message = "You are in the Dungeon.";
+				change_message(message);
+				if (loc2_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc2_visited = true;
+				}
+			}
+			else if (current_loc === "loc4") {
+				current_loc = "loc0";
+				txt_loc_a.value = loc0;
+				message = "You have entered the cave";
+				change_message(message);
+				if (loc0_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc0_visited = true;
+				}
+			}
+			else {
+				message = "You cannot go East from here.";
+				change_message(message);
+			}
+		}
+		
+		function btnSouth_Click() {
+			var txt_points_a = document.getElementById("txt_points");
+			var txt_loc_a = document.getElementById("txt_loc");
+			if (current_loc === "loc1") {
+				current_loc = "loc0";
+				txt_loc_a.value = loc0;
+				message = "You have entered the cave";
+				change_message(message);
+				if (loc0_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc0_visited = true;
+				}
+			}
+			else if (current_loc === "loc0") {
+				current_loc = "loc3";
+				txt_loc_a.value = loc3;
+				message = "You are in the trap room!";
+				change_message(message);
+				if (loc3_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc3_visited = true;
+				}
+			}
+			else {
+				message = "You cannot go South from here.";
+				change_message(message);
+			}
+		}
+		
+		function btnWest_Click() {
+			var txt_points_a = document.getElementById("txt_points");
+			var txt_loc_a = document.getElementById("txt_loc");
+			if (current_loc === "loc2") {
+				current_loc = "loc0";
+				txt_loc_a.value = loc0;
+				message = "You have entered the cave";
+				change_message(message);
+				if (loc0_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc0_visited = true;
+				}
+			}
+			else if (current_loc === "loc0") {
+				current_loc = "loc4";
+				txt_loc_a.value = loc4;
+				message = "You are in the treasure room."
+				change_message(message);
+				if (loc4_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc4_visited = true;
+				}
+			}
+			else {
+				message = "You cannot go West from here.";
+				change_message(message);
+			}
+		}
+      </script>
+   </head>
+   <body>
+	  <body <img src="http://th05.deviantart.net/fs71/PRE/i/2012/364/7/7/pirate__s_treasure_map_by_makkeroe-d5po5v7.jpg"  width="200" height="85" alt="Computer Hope">
+      <div>
+	   <h1>Treasure Hunt</h1>
+	   <a href="mailto:biruk.yohannes1@marist.edu?Subject=hello"> Mail me </a>
+       <br>
+	   <br>
+	   Current Location:
+	   <input readonly
+			  type="text"
+			  id="txt_loc"
+			  value="Entrance">
+	   <br>
+	   <textarea readonly rows="15" cols="30" id="ta_main">Welcome to Treasure Hunt. Your objective is to explore the areas. Every time you visit a new location you will receive 5 points.
+	   </textarea>
+	   <br>
+	   <input type="button"
+			  value="North"
+			  onclick="btnNorth_Click()">
+	   <input type="button"
+			  value="East"
+			  onclick="btnEast_Click()">
+	   <input type="button"
+			  value="South"
+			  onclick="btnSouth_Click()">
+	   <input type="button"
+			  value="West"
+			  onclick="btnWest_Click()">
+       <br>
+	   <br>
+	   Points:
+	   <input readonly
+			  type="text"
+			  id="txt_points"
+			  value=0>
+	  </div> 
+   </body>
+</html>
