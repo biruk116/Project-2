@@ -17,11 +17,13 @@
 		var loc2 = "Dungeon";
 		var loc3 = "Trap Room";
 		var loc4 = "Treasure Room";
+		var loc5 = "Mummy Room";
 		var loc0_visited = false;
 		var loc1_visited = true;
 		var loc2_visited = false;
 		var loc3_visited = false;
 		var loc4_visited = false;
+		var loc5_visited = false;
 		var current_loc = "loc1";
 		var points = 0;
 		var message = "";
@@ -54,6 +56,17 @@
 					points += 5;
 					txt_points_a.value = points;
 					loc0_visited = true;
+				}
+			}
+			else if (current_loc === "loc5") {
+				current_loc = "loc3";
+				txt_loc_a.value = loc3.toString();
+				message = "You have entered the " + txt_loc_a.value.toLowerCase();
+				change_message(message);
+				if (loc3_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc3_visited = true;
 				}
 			}
 			else {
@@ -118,6 +131,17 @@
 					loc3_visited = true;
 				}
 			}
+			else if (current_loc === "loc3") {
+				current_loc = "loc5";
+				txt_loc_a.value = loc5.toString();
+				message = "You have entered the " + txt_loc_a.value.toLowerCase();
+				change_message(message);
+				if (loc5_visited === false) {
+					points += 5;
+					txt_points_a.value = points;
+					loc5_visited = true;
+				}
+			}
 			else {
 				message = "You cannot go South from here.";
 				change_message(message);
@@ -154,6 +178,28 @@
 				change_message(message);
 			}
 		}
+		
+		function btn_Command() {
+			var txt_Command = document.getElementById("txtCommand");
+			var txt_loc_a = document.getElementById("ta_main");
+			var Command = txt_Command.value.toString();
+			if (Command === "n" | "N") {
+				btnNorth_Click();
+			}
+			else if (Command === "s" | "S") {
+				btnSouth_Click();
+			}
+			else if (Command === "e" | "E") {
+				btnEast_Click();
+			}
+			else if (Command === "w" | "W") {
+				btnWest_Click();
+			}
+			else {
+				txt_loc_a.value = "Please enter a valid command!" + txt_loc_a.value;
+			}
+			txt_Command.value = "";
+			}
       </script>
    </head>
    <body>
@@ -173,17 +219,28 @@
 	   <br>
 	   <input type="button"
 			  value="North"
-			  onclick="btnNorth_Click()">
+			  onclick="btnNorth_Click();">
 	   <input type="button"
 			  value="East"
-			  onclick="btnEast_Click()">
+			  onclick="btnEast_Click();">
 	   <input type="button"
 			  value="South"
-			  onclick="btnSouth_Click()">
+			  onclick="btnSouth_Click();">
 	   <input type="button"
 			  value="West"
-			  onclick="btnWest_Click()">
-       <br>
+			  onclick="btnWest_Click();">
+       
+	   <br>
+	   <br>
+	   Command:
+	   <input type="text"
+			  name="txtCommand"
+			  id="txtCommand">
+	   <input type="button"
+			  name="btnCommand"
+			  id="btnCommand"
+			  value="Go"
+			  onclick="btn_Command();">
 	   <br>
 	   Points:
 	   <input readonly
